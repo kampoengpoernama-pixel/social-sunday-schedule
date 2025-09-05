@@ -139,10 +139,10 @@
             card.innerHTML = `
                 <div class="accordion-header p-6 cursor-pointer flex justify-between items-center bg-red-600 text-white hover:bg-red-700 transition-colors">
                     <div class="flex items-center space-x-4">
-                        <h3 class="text-xl font-bold">Week ${item.week} - ${item.topic}</h3>
+                        <h3 class="text-xl font-bold">Week ${item.week} (${item.date}) - ${item.topic}</h3>
                         ${item.exchange && item.exchange !== "—" ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0 0a4 4 0 100 5.292M12 11.292V21m-4-7h8" />
-                          </svg>` : ''}
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0 0a4 4 0 100 5.292M12 11.292V21m-4-7h8" />
+                              </svg>` : ''}
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
