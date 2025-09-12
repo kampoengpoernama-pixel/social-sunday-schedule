@@ -9,18 +9,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General body and font styles */
         body {
+            margin: 0;
+            padding: 0;
             font-family: 'Rubik', 'Poppins', sans-serif;
-            background-color: #f8fafc;
-            color: #1a202c;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #e0e7ff 0%, #ffffff 100%);
+            color: #1f2833;
         }
+
+        /* Volunteer Hub content styles */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
         .card {
-            background-color: white;
+            background-color: #ffffff;
             border-radius: 1rem;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -40,187 +46,190 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body>
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <div class="container">
+            <header class="text-center py-10 mb-12">
+                <h1 class="text-5xl font-extrabold mb-2 text-blue-800">Kampoeng English Poernama</h1>
+                <p class="text-xl text-red-600">Social Sunday Program Volunteer</p>
+            </header>
 
-<div class="container">
-    <header class="text-center py-10 mb-12">
-        <h1 class="text-5xl font-extrabold mb-2 text-blue-600">Kampoeng English Poernama</h1>
-        <p class="text-xl text-red-600">Social Sunday Program Volunteer</p>
-    </header>
+            <!-- Welcome Message Section -->
+            <section class="card bg-blue-100 text-blue-800 p-12 mb-12 rounded-2xl text-center">
+                <h2 class="text-4xl font-bold mb-4 drop-shadow-sm">Welcome, Volunteers!</h2>
+                <p class="text-xl opacity-90 drop-shadow-sm">Thank you for your dedication to our mission. This hub is designed to help you easily find your weekly schedule and understand your roles. Let's make every Sunday a success!</p>
+            </section>
 
-    <!-- Welcome Message Section -->
-    <section class="card bg-blue-700 text-white p-12 mb-12 rounded-2xl text-center">
-        <h2 class="text-4xl font-bold mb-4 drop-shadow-sm">Welcome, Volunteers!</h2>
-        <p class="text-xl opacity-90 drop-shadow-sm">Thank you for your dedication to our mission. This hub is designed to help you easily find your weekly schedule and understand your roles. Let's make every Sunday a success!</p>
-    </section>
-
-    <!-- Schedule Section -->
-    <section id="schedule-section" class="mb-16">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">Weekly Schedule</h2>
-        <div class="relative mb-10">
-            <input type="text" id="searchInput" placeholder="Search by name or topic" class="w-full p-4 pl-16 text-gray-700 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-300 transition-shadow">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </div>
-        <div id="scheduleContainer" class="space-y-8">
-            <!-- Schedule cards will be dynamically inserted here -->
-        </div>
-    </section>
-
-    <!-- Job Desk Section -->
-    <section id="job-desk-section">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">Volunteer Job Descriptions</h2>
-        <div id="jobDeskContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Job descriptions will be dynamically inserted here -->
-        </div>
-    </section>
-</div>
-
-<script>
-    // This is placeholder data for demonstration.
-    // In a real-world application, this would be fetched from a database like Firebase Firestore.
-    const scheduleData = [
-        { week: 1, date: "Sep 14, 2025", topic: "Introduction", class1: "Muhammad Rhakananta Mahdi & Sukmawati", supervisor1: "Aufa", class2: "Diza Putri Arumi & Carla Angelica", supervisor2: "Adet", exchange: "—" },
-        { week: 2, date: "Sep 21, 2025", topic: "My Family", class1: "Lucia Nisrina Zulkifli & Atika Hurin Ain", supervisor1: "Sondang", class2: "Tika Ayu Lestari & Gavin", supervisor2: "Lilis", exchange: "—" },
-        { week: 3, date: "Sep 28, 2025", topic: "My Favorite Things", class1: "Ferdi Oktavian & Tari Okta Pitriyani", supervisor1: "Rina", class2: "Nur Sodiq & Amelia Susanti", supervisor2: "Rizka", exchange: "—" },
-        { week: 4, date: "Oct 5, 2025", topic: "My Home", class1: "Muhammad Rhakananta Mahdi & Diza Putri Arumi", supervisor1: "Salma", class2: "Sukmawati & Carla Angelica", supervisor2: "Tania", exchange: "—" },
-        { week: 5, date: "Oct 12, 2025", topic: "My Body", class1: "Lucia Nisrina Zulkifli & Tika Ayu Lestari", supervisor1: "Aurora", class2: "Atika Hurin Ain & Gavin", supervisor2: "Karin", exchange: "—" },
-        { week: 6, date: "Oct 19, 2025", topic: "My Feelings (Phase 1 Sim)", class1: "Ferdi Oktavian & Nur Sodiq", supervisor1: "Gusti", class2: "Tari Okta Pitriyani & Amelia Susanti", supervisor2: "Annisa Atha", exchange: "Sela" },
-        { week: 7, date: "Oct 26, 2025", topic: "Animals", class1: "Muhammad Rhakananta Mahdi & Atika Hurin Ain", supervisor1: "Anisa", class2: "Diza Putri Arumi & Gavin", supervisor2: "Nandita", exchange: "—" },
-        { week: 8, date: "Nov 2, 2025", topic: "The Zoo", class1: "Sukmawati & Nur Sodiq", supervisor1: "Julia", class2: "Carla Angelica & Amelia Susanti", supervisor2: "Vika", exchange: "—" },
-        { week: 9, date: "Nov 9, 2025", topic: "Colors and Shapes", class1: "Lucia Nisrina Zulkifli & Ferdi Oktavian", supervisor1: "Vivi", class2: "Tika Ayu Lestari & Tari Okta Pitriyani", supervisor2: "Afdi", exchange: "—" },
-        { week: 10, date: "Nov 16, 2025", topic: "Numbers", class1: "Muhammad Rhakananta Mahdi & Tika Ayu Lestari", supervisor1: "Mirza", class2: "Sukmawati & Atika Hurin Ain", supervisor2: "Egy", exchange: "—" },
-        { week: 11, date: "Nov 23, 2025", topic: "Daily Routine", class1: "Diza Putri Arumi & Ferdi Oktavian", supervisor1: "Aufa", class2: "Carla Angelica & Tari Okta Pitriyani", supervisor2: "Sondang", exchange: "—" },
-        { week: 12, date: "Nov 30, 2025", topic: "School Life (Phase 2 Sim)", class1: "Nur Sodiq & Amelia Susanti", supervisor1: "Adet", class2: "Lucia Nisrina Zulkifli & Gavin", supervisor2: "Lilis", exchange: "Amin" },
-        { week: 13, date: "Dec 7, 2025", topic: "Review and Games", class1: "Muhammad Rhakananta Mahdi & Carla Angelica", supervisor1: "Rina", class2: "Sukmawati & Atika Hurin Ain", supervisor2: "Rizka", exchange: "—" },
-        { week: 14, date: "Dec 14, 2025", topic: "Review and Games", class1: "Diza Putri Arumi & Tika Ayu Lestari", supervisor1: "Salma", class2: "Gavin & Nur Sodiq", supervisor2: "Tania", exchange: "—" },
-        { week: 15, date: "Dec 21, 2025", topic: "Storytelling & Role-Play", class1: "Lucia Nisrina Zulkifli & Amelia Susanti", supervisor1: "Aurora", class2: "Ferdi Oktavian & Tari Okta Pitriyani", supervisor2: "Karin", exchange: "—" },
-        { week: 16, date: "Dec 28, 2025", topic: "Storytelling & Role-Play", class1: "Muhammad Rhakananta Mahdi & Ferdi Oktavian", supervisor1: "Gusti", class2: "Sukmawati & Gavin", supervisor2: "Annisa Atha", exchange: "—" },
-        { week: 17, date: "Jan 4, 2026", topic: "Project Week", class1: "Atika Hurin Ain & Nur Sodiq", supervisor1: "Anisa", class2: "Diza Putri Arumi & Amelia Susanti", supervisor2: "Nandita", exchange: "—" },
-        { week: 18, date: "Jan 11, 2026", topic: "Project Week (Phase 3 Sim)", class1: "Lucia Nisrina Zulkifli & Tika Ayu Lestari", supervisor1: "Julia", class2: "Carla Angelica & Tari Okta Pitriyani", supervisor2: "Vika", exchange: "Sela & Amin" }
-    ];
-
-    const jobDescriptions = [
-        {
-            title: "Facilitator",
-            description: "New volunteers who lead the lessons for the children.",
-            responsibilities: [
-                "Prepare and lead engaging English lessons for elementary-aged children.",
-                "Create a fun and interactive learning environment.",
-                "Manage classroom activities and encourage student participation.",
-                "Collaborate with your co-facilitator and supervisor to ensure a smooth session.",
-                "Adapt teaching methods to suit different learning styles."
-            ]
-        },
-        {
-            title: "Session Supervisor",
-            description: "Senior volunteers who provide guidance and support to the facilitators.",
-            responsibilities: [
-                "Observe and provide constructive feedback to facilitators during the session.",
-                "Ensure the lesson plan is followed and the session stays on track.",
-                "Assist facilitators with any challenges that arise.",
-                "Act as a mentor to new volunteers, answering questions and offering advice.",
-                "Help maintain discipline and a positive atmosphere in the classroom."
-            ]
-        }
-    ];
-
-    const scheduleContainer = document.getElementById('scheduleContainer');
-    const searchInput = document.getElementById('searchInput');
-    const jobDeskContainer = document.getElementById('jobDeskContainer');
-
-    // Function to render the schedule
-    function renderSchedule(data) {
-        scheduleContainer.innerHTML = '';
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card overflow-hidden transition-all duration-300';
-            card.innerHTML = `
-                <div class="accordion-header p-6 cursor-pointer flex justify-between items-center bg-red-600 text-white hover:bg-red-700 transition-colors">
-                    <div class="flex items-center space-x-4">
-                        <h3 class="text-xl font-bold">Week ${item.week} (${item.date}) - ${item.topic}</h3>
-                        ${item.exchange && item.exchange !== "—" ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0 0a4 4 0 100 5.292M12 11.292V21m-4-7h8" />
-                              </svg>` : ''}
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            <!-- Schedule Section -->
+            <section id="schedule-section" class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">Weekly Schedule</h2>
+                <div class="relative mb-10">
+                    <input type="text" id="searchInput" placeholder="Search by name or topic" class="w-full p-4 pl-16 bg-gray-100 text-gray-800 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500 transition-shadow placeholder-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
-                <div class="accordion-content bg-white border-t border-gray-200">
-                    <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="p-6 bg-blue-100 rounded-lg shadow-inner">
-                            <h4 class="text-lg font-semibold text-blue-800 mb-2">Session 1 (13.00-14.30)</h4>
-                            <p class="text-sm text-gray-700 mb-1"><strong class="font-bold">Facilitators:</strong> ${item.class1}</p>
-                            <p class="text-sm text-gray-700"><strong class="font-bold">Supervisor:</strong> ${item.supervisor1}</p>
-                        </div>
-                        <div class="p-6 bg-blue-100 rounded-lg shadow-inner">
-                            <h4 class="text-lg font-semibold text-blue-800 mb-2">Session 2 (15.30-17.00)</h4>
-                            <p class="text-sm text-gray-700 mb-1"><strong class="font-bold">Facilitators:</strong> ${item.class2}</p>
-                            <p class="text-sm text-gray-700"><strong class="font-bold">Supervisor:</strong> ${item.supervisor2}</p>
-                        </div>
-                        ${item.exchange && item.exchange !== "—" ? `
-                        <div class="p-6 bg-red-100 rounded-lg shadow-inner md:col-span-2">
-                            <h4 class="text-lg font-semibold text-red-800 mb-2">Foreign Exchange Student</h4>
-                            <p class="text-sm text-gray-700 mb-1">${item.exchange}</p>
-                        </div>
-                        ` : ''}
-                    </div>
+                <div id="scheduleContainer" class="space-y-8">
+                    <!-- Schedule cards will be dynamically inserted here -->
                 </div>
-            `;
-            scheduleContainer.appendChild(card);
-        });
+            </section>
 
-        // Add event listeners for the accordion
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const icon = header.querySelector('svg');
-                content.classList.toggle('open');
-                icon.classList.toggle('rotate-180');
+            <!-- Job Desk Section -->
+            <section id="job-desk-section">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">Volunteer Job Descriptions</h2>
+                <div id="jobDeskContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Job descriptions will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Updated and perfectly balanced schedule data for 15 teachers
+        const scheduleData = [
+            { week: 1, date: "Sep 14, 2025", topic: "Introduction", class1: "Diza Putri Arumi & Ferdi Oktavian", supervisor1: "Aufa", class2: "Lucia Nisrina Zulkifli & Carla Angelica", supervisor2: "Adet", exchange: "—" },
+            { week: 2, date: "Sep 21, 2025", topic: "My Family", class1: "Fatih & Gavin", supervisor1: "Sondang", class2: "Muhammad Rhakananta Mahdi & Sukmawati", supervisor2: "Lilis", exchange: "—" },
+            { week: 3, date: "Sep 28, 2025", topic: "My Favorite Things", class1: "Tika Ayu Lestari & Claudia Leandry", supervisor1: "Rizka", class2: "Atika Hurin Ain & Tari Okta Pitriyani", supervisor2: "Salma", exchange: "—" },
+            { week: 4, date: "Oct 5, 2025", topic: "My Home", class1: "Nadia & Nur Sodiq", supervisor1: "Tania", class2: "Ferdi Oktavian & Amelia Susanti", supervisor2: "Aurora", exchange: "—" },
+            { week: 5, date: "Oct 12, 2025", topic: "My Body", class1: "Atika Hurin Ain & Ferdi Oktavian", supervisor1: "Karin", class2: "Fatih & Gavin", supervisor2: "Gusti", exchange: "—" },
+            { week: 6, date: "Oct 19, 2025", topic: "My Feelings (Phase 1 Sim)", class1: "Lucia Nisrina Zulkifli & Nadia", supervisor1: "Annisa Atha", class2: "Tika Ayu Lestari & Claudia Leandry", supervisor2: "Rina", exchange: "Sela" },
+            { week: 7, date: "Oct 26, 2025", topic: "Animals", class1: "Muhammad Rhakananta Mahdi & Tari Okta Pitriyani", supervisor1: "Anisa", class2: "Amelia Susanti & Carla Angelica", supervisor2: "Nandita", exchange: "—" },
+            { week: 8, date: "Nov 2, 2025", topic: "The Zoo", class1: "Diza Putri Arumi & Atika Hurin Ain", supervisor1: "Julia", class2: "Sukmawati & Claudia Leandry", supervisor2: "Vivi", exchange: "—" },
+            { week: 9, date: "Nov 9, 2025", topic: "Colors and Shapes", class1: "Fatih & Ferdi Oktavian", supervisor1: "Mirza", class2: "Gavin & Nur Sodiq", supervisor2: "Egy", exchange: "—" },
+            { week: 10, date: "Nov 16, 2025", topic: "Numbers", class1: "Lucia Nisrina Zulkifli & Tari Okta Pitriyani", supervisor1: "Aufa", class2: "Tika Ayu Lestari & Sukmawati", supervisor2: "Adet", exchange: "—" },
+            { week: 11, date: "Nov 23, 2025", topic: "Daily Routine", class1: "Muhammad Rhakananta Mahdi & Nadia", supervisor1: "Sondang", class2: "Carla Angelica & Amelia Susanti", supervisor2: "Lilis", exchange: "—" },
+            { week: 12, date: "Nov 30, 2025", topic: "School Life (Phase 2 Sim)", class1: "Diza Putri Arumi & Gavin", supervisor1: "Rizka", class2: "Fatih & Atika Hurin Ain", supervisor2: "Salma", exchange: "Amin" },
+            { week: 13, date: "Dec 7, 2025", topic: "Review and Games", class1: "Tika Ayu Lestari & Tari Okta Pitriyani", supervisor1: "Tania", class2: "Muhammad Rhakananta Mahdi & Sukmawati", supervisor2: "Aurora", exchange: "—" },
+            { week: 14, date: "Dec 14, 2025", topic: "Review and Games", class1: "Ferdi Oktavian & Nur Sodiq", supervisor1: "Karin", class2: "Amelia Susanti & Carla Angelica", supervisor2: "Gusti", exchange: "—" },
+            { week: 15, date: "Dec 21, 2025", topic: "Storytelling & Role-Play", class1: "Diza Putri Arumi & Nadia", supervisor1: "Annisa Atha", class2: "Lucia Nisrina Zulkifli & Claudia Leandry", supervisor2: "Rina", exchange: "—" },
+            { week: 16, date: "Dec 28, 2025", topic: "Storytelling & Role-Play", class1: "Gavin & Sukmawati", supervisor1: "Anisa", class2: "Fatih & Tari Okta Pitriyani", supervisor2: "Nandita", exchange: "—" },
+            { week: 17, date: "Jan 4, 2026", topic: "Project Week", class1: "Muhammad Rhakananta Mahdi & Atika Hurin Ain", supervisor1: "Julia", class2: "Tika Ayu Lestari & Nur Sodiq", supervisor2: "Vivi", exchange: "—" },
+            { week: 18, date: "Jan 11, 2026", topic: "Project Week (Phase 3 Sim)", class1: "Lucia Nisrina Zulkifli & Claudia Leandry", supervisor1: "Kak Beng", class2: "Diza Putri Arumi & Amelia Susanti", supervisor2: "Rifa", exchange: "Sela & Amin" }
+        ];
+
+        const jobDescriptions = [
+            {
+                title: "Facilitator",
+                description: "New volunteers who lead the lessons for the children.",
+                responsibilities: [
+                    "Prepare and lead engaging English lessons for elementary-aged children.",
+                    "Create a fun and interactive learning environment.",
+                    "Manage classroom activities and encourage student participation.",
+                    "Collaborate with your co-facilitator and supervisor to ensure a smooth session.",
+                    "Adapt teaching methods to suit different learning styles."
+                ]
+            },
+            {
+                title: "Session Supervisor",
+                description: "Senior volunteers who provide guidance and support to the facilitators.",
+                responsibilities: [
+                    "Observe and provide constructive feedback to facilitators during the session.",
+                    "Ensure the lesson plan is followed and the session stays on track.",
+                    "Assist facilitators with any challenges that arise.",
+                    "Act as a mentor to new volunteers, answering questions and offering advice.",
+                    "Help maintain discipline and a positive atmosphere in the classroom."
+                ]
+            }
+        ];
+
+        // This is a single script block for all functionality
+        const scheduleContainer = document.getElementById('scheduleContainer');
+        const searchInput = document.getElementById('searchInput');
+        const jobDeskContainer = document.getElementById('jobDeskContainer');
+
+        // Function to render the schedule
+        function renderSchedule(data) {
+            scheduleContainer.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card overflow-hidden transition-all duration-300';
+                card.innerHTML = `
+                    <div class="accordion-header p-6 cursor-pointer flex justify-between items-center bg-red-600 hover:bg-red-700 transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <h3 class="text-xl font-bold text-white">Week ${item.week} (${item.date}) - ${item.topic}</h3>
+                            ${item.exchange && item.exchange !== "—" ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0 0a4 4 0 100 5.292M12 11.292V21m-4-7h8" />
+                                  </svg>` : ''}
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="accordion-content bg-white border-t border-gray-200">
+                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800">
+                            <div class="p-6 bg-blue-100 rounded-lg shadow-inner">
+                                <h4 class="text-lg font-semibold text-blue-800 mb-2">Session 1 (13.00-14.30)</h4>
+                                <p class="text-sm mb-1"><strong class="font-bold">Facilitators:</strong> ${item.class1}</p>
+                                <p class="text-sm"><strong class="font-bold">Supervisor:</strong> ${item.supervisor1}</p>
+                            </div>
+                            <div class="p-6 bg-blue-100 rounded-lg shadow-inner">
+                                <h4 class="text-lg font-semibold text-blue-800 mb-2">Session 2 (15.30-17.00)</h4>
+                                <p class="text-sm mb-1"><strong class="font-bold">Facilitators:</strong> ${item.class2}</p>
+                                <p class="text-sm"><strong class="font-bold">Supervisor:</strong> ${item.supervisor2}</p>
+                            </div>
+                            ${item.exchange && item.exchange !== "—" ? `
+                            <div class="p-6 bg-red-100 rounded-lg shadow-inner md:col-span-2">
+                                <h4 class="text-lg font-semibold text-red-800 mb-2">Foreign Exchange Student</h4>
+                                <p class="text-sm mb-1">${item.exchange}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                scheduleContainer.appendChild(card);
             });
+
+            // Add event listeners for the accordion
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('svg');
+                    content.classList.toggle('open');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        }
+
+        // Function to render job descriptions
+        function renderJobDescriptions() {
+            jobDeskContainer.innerHTML = '';
+            jobDescriptions.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'card p-8';
+                card.innerHTML = `
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">${job.title}</h3>
+                    <p class="text-gray-600 mb-4">${job.description}</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Key Responsibilities:</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                    </ul>
+                `;
+                jobDeskContainer.appendChild(card);
+            });
+        }
+
+        // Function to handle search filtering
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filteredData = scheduleData.filter(item => {
+                const class1 = item.class1.toLowerCase();
+                const class2 = item.class2.toLowerCase();
+                const supervisor1 = item.supervisor1.toLowerCase();
+                const supervisor2 = item.supervisor2.toLowerCase();
+                const topic = item.topic.toLowerCase();
+                const week = item.week.toString().toLowerCase();
+                const exchange = item.exchange.toLowerCase();
+                return class1.includes(query) || class2.includes(query) || supervisor1.includes(query) || supervisor2.includes(query) || topic.includes(query) || week.includes(query) || exchange.includes(query);
+            });
+            renderSchedule(filteredData);
         });
-    }
 
-    // Function to render job descriptions
-    function renderJobDescriptions() {
-        jobDeskContainer.innerHTML = '';
-        jobDescriptions.forEach(job => {
-            const card = document.createElement('div');
-            card.className = 'card p-8 bg-white';
-            card.innerHTML = `
-                <h3 class="text-2xl font-bold text-red-600 mb-4">${job.title}</h3>
-                <p class="text-gray-600 mb-4">${job.description}</p>
-                <h4 class="text-lg font-semibold text-gray-700 mb-2">Key Responsibilities:</h4>
-                <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                    ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
-                </ul>
-            `;
-            jobDeskContainer.appendChild(card);
+        // Initial render
+        window.addEventListener('load', () => {
+            renderSchedule(scheduleData);
+            renderJobDescriptions();
         });
-    }
-
-    // Function to handle search filtering
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const filteredData = scheduleData.filter(item => {
-            const class1 = item.class1.toLowerCase();
-            const class2 = item.class2.toLowerCase();
-            const supervisor1 = item.supervisor1.toLowerCase();
-            const supervisor2 = item.supervisor2.toLowerCase();
-            const topic = item.topic.toLowerCase();
-            const week = item.week.toString().toLowerCase();
-            const exchange = item.exchange.toLowerCase();
-            return class1.includes(query) || class2.includes(query) || supervisor1.includes(query) || supervisor2.includes(query) || topic.includes(query) || week.includes(query) || exchange.includes(query);
-        });
-        renderSchedule(filteredData);
-    });
-
-    // Initial render
-    renderSchedule(scheduleData);
-    renderJobDescriptions();
-</script>
-
+    </script>
 </body>
 </html>
